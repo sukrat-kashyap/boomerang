@@ -766,7 +766,7 @@ module.exports = function() {
 		protractor_webdriver: {
 			options: {
 				keepAlive: true,
-				command: "webdriver-manager start " + webDriverVersions
+				command: "webdriver-manager start " + (webDriverVersions || "")
 			},
 			e2e: {
 			}
