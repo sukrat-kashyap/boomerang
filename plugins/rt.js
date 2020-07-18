@@ -71,8 +71,8 @@
  * * `rt.tt`: Sum of load times across session
  * * `rt.obo`: Number of pages in session that did not have a load time
  * * `ru`: final response URL after any redirects
- *    - `XMLHttpRequest`: it will be present, even if no redirect happened.
- *       Since, we do not have a way to identify it
+ *    - `XMLHttpRequest`: it will be present if any redirects happened
+ *       and final URL is not equivalent to the final response URL after any redirects.
  *    - `fetch`: it will only be present if any redirects happened
  *
  * ## Cookie
@@ -1578,7 +1578,7 @@
 				}
 
 				if (edata.responseUrl) {
-					BOOMR.addVar("ru", edata.responseUrl, true);
+					BOOMR.addVar("xhr.ru", BOOMR.utils.cleanupURL(edata.responseUrl), true);
 				}
 			}
 
