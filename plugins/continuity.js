@@ -1198,7 +1198,7 @@
 
 		var idleIntervals = 0;
 
-		var bucketsVisited = undefined;
+		var bucketsVisited;
 
 		// check for pre-Boomerang FPS log
 		if (BOOMR.fpsLog && BOOMR.fpsLog.length) {
@@ -1749,7 +1749,8 @@
 				if (data.hasOwnProperty(type)) {
 					if (tti > 0) {
 						data[type] = [];
-					} else {
+					}
+					else {
 						var oldData = data[type];
 						var newData = new Array(bucketsVisited + 1);
 						data[type] = newData.concat(oldData.slice(bucketsVisited + 1));
