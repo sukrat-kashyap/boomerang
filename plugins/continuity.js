@@ -1623,9 +1623,12 @@
 			}
 
 			// determine the first bucket we'd use
-			var startBucket = bucketsVisited;
-			if (typeof startBucket === "undefined") {
+			var startBucket;
+			if (typeof bucketsVisited === "undefined") {
 				startBucket = Math.floor((visuallyReady - startTime) / COLLECTION_INTERVAL);
+			}
+			else {
+				startBucket = bucketsVisited + 1;
 			}
 
 			for (j = startBucket; j <= endBucket; j++) {
@@ -1747,13 +1750,13 @@
 			// clear the buckets
 			for (var type in data) {
 				if (data.hasOwnProperty(type)) {
-					if (tti > 0) {
-						data[type] = [];
-					}
-					else {
+					if (!tti && bucketsVisited > 0) {
 						var oldData = data[type];
 						var newData = new Array(bucketsVisited + 1);
 						data[type] = newData.concat(oldData.slice(bucketsVisited + 1));
+					}
+					else {
+						data[type] = [];
 					}
 				}
 			}
